@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "name": "Priya Sharma",
+        "title": "From Stay-at-Home Mom to Tech Leader",
+        "industry": "Technology",
+        "summary": "After a 5-year career break, Priya successfully returned to tech and now leads a development team at a major tech company.",
+        "quote": "The support and mentorship I received through JobsForHer was instrumental in my successful return to tech."
+    },
+    {
+        "id": "2",
+        "name": "Anita Patel",
+        "title": "Breaking into Data Science",
+        "industry": "Data Science",
+        "summary": "Transitioned from traditional analytics to data science through upskilling and mentorship.",
+        "quote": "The learning resources and community support helped me make a successful career transition."
+    },
+    {
+        "id": "3",
+        "name": "Meera Reddy",
+        "title": "Rising Through Product Management",
+        "industry": "Product Management",
+        "summary": "Started as a software developer and successfully transitioned to product management.",
+        "quote": "The career guidance and networking opportunities opened new doors for my career growth."
+    }
+] 

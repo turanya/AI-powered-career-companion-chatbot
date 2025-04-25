@@ -1,0 +1,53 @@
+[
+    {
+        "category": "Career Development",
+        "resources": [
+            {
+                "title": "Resume Writing Guide",
+                "type": "Guide",
+                "description": "Comprehensive guide to creating an impactful resume",
+                "url": "https://example.com/resume-guide"
+            },
+            {
+                "title": "Interview Preparation",
+                "type": "Workshop",
+                "description": "Tips and strategies for successful interviews",
+                "url": "https://example.com/interview-prep"
+            }
+        ]
+    },
+    {
+        "category": "Technical Skills",
+        "resources": [
+            {
+                "title": "Python for Beginners",
+                "type": "Course",
+                "description": "Introduction to Python programming",
+                "url": "https://example.com/python-course"
+            },
+            {
+                "title": "Data Science Fundamentals",
+                "type": "Tutorial",
+                "description": "Basic concepts in data science",
+                "url": "https://example.com/data-science"
+            }
+        ]
+    },
+    {
+        "category": "Leadership",
+        "resources": [
+            {
+                "title": "Women in Leadership",
+                "type": "Webinar",
+                "description": "Leadership strategies for women in tech",
+                "url": "https://example.com/women-leadership"
+            },
+            {
+                "title": "Team Management",
+                "type": "Guide",
+                "description": "Effective team management practices",
+                "url": "https://example.com/team-management"
+            }
+        ]
+    }
+] 

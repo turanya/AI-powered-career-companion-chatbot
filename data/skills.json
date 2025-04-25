@@ -1,0 +1,62 @@
+[
+    {
+        "category": "Technical Skills",
+        "skills": [
+            {
+                "name": "Python Programming",
+                "demand": "High",
+                "description": "Essential for software development and data science roles"
+            },
+            {
+                "name": "Data Analysis",
+                "demand": "High",
+                "description": "Critical skill for data-driven decision making"
+            },
+            {
+                "name": "Cloud Computing",
+                "demand": "High",
+                "description": "Growing demand for cloud expertise across industries"
+            }
+        ]
+    },
+    {
+        "category": "Leadership Skills",
+        "skills": [
+            {
+                "name": "Team Management",
+                "demand": "High",
+                "description": "Essential for leading and growing teams"
+            },
+            {
+                "name": "Strategic Planning",
+                "demand": "High",
+                "description": "Critical for organizational leadership roles"
+            },
+            {
+                "name": "Communication",
+                "demand": "High",
+                "description": "Fundamental for effective leadership"
+            }
+        ]
+    },
+    {
+        "category": "Soft Skills",
+        "skills": [
+            {
+                "name": "Problem Solving",
+                "demand": "High",
+                "description": "Essential across all roles and industries"
+            },
+            {
+                "name": "Adaptability",
+                "demand": "High",
+                "description": "Critical in fast-changing work environments"
+            },
+            {
+                "name": "Collaboration",
+                "demand": "High",
+                "description": "Key for success in modern workplaces"
+            }
+        ]
+    }
+] 

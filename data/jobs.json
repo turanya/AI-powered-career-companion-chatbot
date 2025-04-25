@@ -1,0 +1,139 @@
+{
+    "jobs": [
+        {
+            "id": "JOB001",
+            "title": "Senior Software Engineer",
+            "company": {
+                "name": "TechCorp India",
+                "location": "Bangalore",
+                "type": "MNC",
+                "website": "https://techcorp.com"
+            },
+            "department": "Engineering",
+            "employment_type": "Full-time",
+            "work_mode": "Hybrid",
+            "experience_required": {
+                "min": 5,
+                "max": 8,
+                "preferred_domains": ["Backend Development", "Cloud Services"]
+            },
+            "skills_required": {
+                "technical": ["Java", "Spring Boot", "AWS", "Microservices"],
+                "soft_skills": ["Team Leadership", "Communication", "Problem Solving"]
+            },
+            "job_description": "Looking for an experienced software engineer to lead backend development teams and drive technical initiatives.",
+            "responsibilities": [
+                "Design and implement scalable backend services",
+                "Lead a team of 4-5 developers",
+                "Collaborate with product and frontend teams",
+                "Mentor junior developers"
+            ],
+            "salary_range": {
+                "min": 2000000,
+                "max": 3500000,
+                "currency": "INR"
+            },
+            "benefits": [
+                "Health Insurance",
+                "Stock Options",
+                "Flexible Work Hours",
+                "Learning Budget"
+            ],
+            "posted_date": "2024-02-10",
+            "application_deadline": "2024-03-10",
+            "application_link": "https://careers.techcorp.com/jobs/JOB001"
+        },
+        {
+            "id": "JOB002",
+            "title": "Product Marketing Manager",
+            "company": {
+                "name": "InnovateX Solutions",
+                "location": "Mumbai",
+                "type": "Startup",
+                "website": "https://innovatex.in"
+            },
+            "department": "Marketing",
+            "employment_type": "Full-time",
+            "work_mode": "Remote",
+            "experience_required": {
+                "min": 3,
+                "max": 6,
+                "preferred_domains": ["Product Marketing", "Digital Marketing"]
+            },
+            "skills_required": {
+                "technical": ["Market Research", "Analytics Tools", "Content Strategy"],
+                "soft_skills": ["Strategic Thinking", "Stakeholder Management", "Presentation"]
+            },
+            "job_description": "Seeking a dynamic product marketing manager to drive go-to-market strategies for our SaaS products.",
+            "responsibilities": [
+                "Develop marketing strategies",
+                "Create product positioning and messaging",
+                "Conduct market research",
+                "Work with sales teams"
+            ],
+            "salary_range": {
+                "min": 1500000,
+                "max": 2500000,
+                "currency": "INR"
+            },
+            "benefits": [
+                "Health Insurance",
+                "Performance Bonus",
+                "Remote Work",
+                "Professional Development"
+            ],
+            "posted_date": "2024-02-12",
+            "application_deadline": "2024-03-15",
+            "application_link": "https://innovatex.in/careers/JOB002"
+        },
+        {
+            "id": "JOB003",
+            "title": "Data Scientist",
+            "company": {
+                "name": "FinTech Solutions",
+                "location": "Hyderabad",
+                "type": "Financial Services",
+                "website": "https://fintechsolutions.com"
+            },
+            "department": "Analytics",
+            "employment_type": "Full-time",
+            "work_mode": "On-site",
+            "experience_required": {
+                "min": 2,
+                "max": 5,
+                "preferred_domains": ["Machine Learning", "Financial Analytics"]
+            },
+            "skills_required": {
+                "technical": ["Python", "SQL", "Machine Learning", "Statistical Analysis"],
+                "soft_skills": ["Analytical Thinking", "Problem Solving", "Communication"]
+            },
+            "job_description": "Join our analytics team to build predictive models and drive data-driven decisions in fintech.",
+            "responsibilities": [
+                "Develop ML models",
+                "Analyze financial data",
+                "Create data visualizations",
+                "Present insights to stakeholders"
+            ],
+            "salary_range": {
+                "min": 1200000,
+                "max": 2000000,
+                "currency": "INR"
+            },
+            "benefits": [
+                "Health Insurance",
+                "Annual Bonus",
+                "Gym Membership",
+                "Training Programs"
+            ],
+            "posted_date": "2024-02-14",
+            "application_deadline": "2024-03-20",
+            "application_link": "https://fintechsolutions.com/careers/JOB003"
+        }
+    ],
+    "meta": {
+        "last_updated": "2024-02-15",
+        "total_jobs": 3,
+        "categories": ["Technology", "Marketing", "Analytics"],
+        "locations": ["Bangalore", "Mumbai", "Hyderabad"]
+    }
+} 

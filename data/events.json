@@ -1,0 +1,128 @@
+{
+    "events": [
+        {
+            "id": "EVT001",
+            "title": "Women in Tech Leadership Summit 2024",
+            "type": "Conference",
+            "format": "Hybrid",
+            "date": {
+                "start": "2024-03-15",
+                "end": "2024-03-16",
+                "time": "09:00 AM - 06:00 PM IST"
+            },
+            "location": {
+                "venue": "The Leela Palace",
+                "city": "Bangalore",
+                "virtual_platform": "Hopin"
+            },
+            "description": "Join leading women technologists for two days of inspiring talks, workshops, and networking opportunities.",
+            "agenda": [
+                {
+                    "day": 1,
+                    "sessions": [
+                        {
+                            "time": "09:00 - 10:00",
+                            "title": "Keynote: Breaking Barriers in Tech Leadership",
+                            "speaker": "Debjani Ghosh, President NASSCOM"
+                        },
+                        {
+                            "time": "10:30 - 12:00",
+                            "title": "Panel: Navigating Career Transitions",
+                            "speakers": ["Multiple Industry Leaders"]
+                        }
+                    ]
+                }
+            ],
+            "speakers": [
+                {
+                    "name": "Debjani Ghosh",
+                    "title": "President",
+                    "organization": "NASSCOM",
+                    "bio": "Technology industry leader with over 25 years of experience"
+                }
+            ],
+            "registration": {
+                "fee": {
+                    "amount": 2000,
+                    "currency": "INR",
+                    "early_bird_discount": true
+                },
+                "deadline": "2024-03-10",
+                "link": "https://womenintech2024.com/register"
+            }
+        },
+        {
+            "id": "EVT002",
+            "title": "Career Restart Workshop",
+            "type": "Workshop",
+            "format": "Virtual",
+            "date": {
+                "start": "2024-03-20",
+                "end": "2024-03-20",
+                "time": "02:00 PM - 05:00 PM IST"
+            },
+            "location": {
+                "virtual_platform": "Zoom"
+            },
+            "description": "Interactive workshop designed for women professionals looking to restart their careers after a break.",
+            "agenda": [
+                {
+                    "time": "14:00 - 14:45",
+                    "title": "Resume Building for Career Returners",
+                    "facilitator": "HR Expert from Leading Tech Company"
+                },
+                {
+                    "time": "15:00 - 15:45",
+                    "title": "Interview Preparation Strategies",
+                    "facilitator": "Career Coach"
+                }
+            ],
+            "registration": {
+                "fee": {
+                    "amount": 500,
+                    "currency": "INR"
+                },
+                "deadline": "2024-03-18",
+                "link": "https://jobsforher.com/events/career-restart"
+            }
+        },
+        {
+            "id": "EVT003",
+            "title": "Tech Skills Bootcamp",
+            "type": "Training",
+            "format": "In-person",
+            "date": {
+                "start": "2024-04-01",
+                "end": "2024-04-05",
+                "time": "10:00 AM - 04:00 PM IST"
+            },
+            "location": {
+                "venue": "Tech Hub",
+                "city": "Mumbai"
+            },
+            "description": "Five-day intensive bootcamp covering in-demand tech skills including cloud computing, AI/ML, and data analytics.",
+            "curriculum": [
+                "Cloud Computing Fundamentals",
+                "Introduction to AI/ML",
+                "Data Analytics with Python",
+                "Web Development Basics",
+                "Project Work"
+            ],
+            "registration": {
+                "fee": {
+                    "amount": 15000,
+                    "currency": "INR",
+                    "installment_available": true
+                },
+                "deadline": "2024-03-25",
+                "link": "https://techhub.com/bootcamp2024"
+            }
+        }
+    ],
+    "meta": {
+        "last_updated": "2024-02-15",
+        "total_events": 3,
+        "categories": ["Conference", "Workshop", "Training"],
+        "locations": ["Bangalore", "Mumbai", "Virtual"]
+    }
+} 

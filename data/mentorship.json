@@ -1,0 +1,273 @@
+{
+    "mentorship_programs": [
+        {
+            "id": "MP001",
+            "title": "Women in Leadership Mentorship Program",
+            "category": "Executive Leadership",
+            "description": "One-on-one mentorship program pairing experienced women leaders with aspiring professionals seeking to advance their careers in leadership roles.",
+            "duration": {
+                "months": 6,
+                "start_date": "2024-04-01",
+                "end_date": "2024-09-30"
+            },
+            "mentors": [
+                {
+                    "id": "MNT001",
+                    "name": "Vandana Sharma",
+                    "title": "CEO",
+                    "company": "TechVision India",
+                    "expertise": ["Strategic Leadership", "Business Development", "Digital Transformation"],
+                    "experience_years": 20,
+                    "availability": {
+                        "slots_per_week": 2,
+                        "preferred_time": "Evening IST"
+                    }
+                }
+            ],
+            "program_structure": {
+                "sessions_per_month": 2,
+                "session_duration": "60 minutes",
+                "format": "Virtual",
+                "activities": [
+                    "One-on-one mentoring sessions",
+                    "Goal setting and tracking",
+                    "Leadership skills development",
+                    "Career planning"
+                ]
+            },
+            "eligibility": {
+                "experience": "5+ years",
+                "current_role": "Mid to Senior Management",
+                "requirements": [
+                    "Demonstrated leadership potential",
+                    "Clear career goals",
+                    "Commitment to program duration"
+                ]
+            },
+            "application": {
+                "deadline": "2024-03-15",
+                "process": [
+                    "Online application submission",
+                    "Resume review",
+                    "Brief interview"
+                ],
+                "link": "https://jobsforher.com/mentorship/leadership"
+            }
+        },
+        {
+            "id": "MP002",
+            "title": "Tech Career Acceleration Program",
+            "category": "Technology",
+            "description": "Structured mentorship program for women in technology roles looking to accelerate their career growth and technical expertise.",
+            "duration": {
+                "months": 4,
+                "start_date": "2024-03-01",
+                "end_date": "2024-06-30"
+            },
+            "mentors": [
+                {
+                    "id": "MNT002",
+                    "name": "Priya Mehta",
+                    "title": "Senior Engineering Manager",
+                    "company": "GlobalTech Solutions",
+                    "expertise": ["Software Architecture", "Cloud Computing", "Team Leadership"],
+                    "experience_years": 15,
+                    "availability": {
+                        "slots_per_week": 1,
+                        "preferred_time": "Weekend IST"
+                    }
+                }
+            ],
+            "program_structure": {
+                "sessions_per_month": 4,
+                "session_duration": "45 minutes",
+                "format": "Hybrid",
+                "activities": [
+                    "Technical skill assessment",
+                    "Project guidance",
+                    "Code reviews",
+                    "Career path planning"
+                ]
+            },
+            "eligibility": {
+                "experience": "2+ years",
+                "current_role": "Software Developer/Engineer",
+                "requirements": [
+                    "Strong programming fundamentals",
+                    "Project portfolio",
+                    "Growth mindset"
+                ]
+            },
+            "application": {
+                "deadline": "2024-02-25",
+                "process": [
+                    "Technical assessment",
+                    "Application review",
+                    "Mentor matching"
+                ],
+                "link": "https://jobsforher.com/mentorship/tech"
+            }
+        },
+        {
+            "id": "MP003",
+            "title": "Career Restart Mentorship",
+            "category": "Career Transition",
+            "description": "Supportive mentorship program designed for women professionals looking to return to the workforce after a career break.",
+            "duration": {
+                "months": 3,
+                "start_date": "2024-04-15",
+                "end_date": "2024-07-15"
+            },
+            "mentors": [
+                {
+                    "id": "MNT003",
+                    "name": "Anjali Desai",
+                    "title": "HR Director",
+                    "company": "Future Workforce Inc",
+                    "expertise": ["Career Counseling", "HR Management", "Professional Development"],
+                    "experience_years": 12,
+                    "availability": {
+                        "slots_per_week": 3,
+                        "preferred_time": "Flexible"
+                    }
+                }
+            ],
+            "program_structure": {
+                "sessions_per_month": 4,
+                "session_duration": "60 minutes",
+                "format": "Virtual",
+                "activities": [
+                    "Skills assessment and gap analysis",
+                    "Resume building workshops",
+                    "Interview preparation",
+                    "Networking strategies"
+                ]
+            },
+            "eligibility": {
+                "experience": "Previous work experience",
+                "career_gap": "1+ years",
+                "requirements": [
+                    "Commitment to return to workforce",
+                    "Clear career objectives",
+                    "Regular participation"
+                ]
+            },
+            "application": {
+                "deadline": "2024-04-01",
+                "process": [
+                    "Application form",
+                    "Career goals statement",
+                    "Informal discussion"
+                ],
+                "link": "https://jobsforher.com/mentorship/restart"
+            }
+        }
+    ],
+    "mentors": [
+        {
+            "id": "MNT001",
+            "name": "Dr. Anjali Kumar",
+            "title": "Director of Engineering",
+            "company": "GlobalTech Solutions",
+            "experience": {
+                "years": 15,
+                "domains": ["Software Architecture", "Team Leadership", "Cloud Computing"]
+            },
+            "expertise": {
+                "technical": ["Java", "AWS", "Microservices"],
+                "soft_skills": ["Leadership", "Communication", "Career Planning"]
+            },
+            "mentorship_focus": [
+                "Technology Leadership",
+                "Career Transitions",
+                "Work-Life Balance"
+            ],
+            "availability": {
+                "slots": ["Tuesday evenings", "Saturday mornings"],
+                "timezone": "IST",
+                "duration": "45 minutes"
+            },
+            "languages": ["English", "Hindi"],
+            "rating": 4.9,
+            "testimonials": [
+                {
+                    "mentee": "Priya S.",
+                    "text": "Dr. Kumar's guidance helped me transition from a developer to a tech lead role.",
+                    "rating": 5
+                }
+            ]
+        },
+        {
+            "id": "MNT002",
+            "name": "Sarah Chen",
+            "title": "Product Director",
+            "company": "InnovateNow",
+            "experience": {
+                "years": 12,
+                "domains": ["Product Management", "UX Design", "Agile"]
+            },
+            "expertise": {
+                "technical": ["Product Strategy", "Market Research", "Data Analytics"],
+                "soft_skills": ["Stakeholder Management", "Negotiation", "Team Building"]
+            },
+            "mentorship_focus": [
+                "Product Career Path",
+                "Leadership Skills",
+                "Women in Product"
+            ],
+            "availability": {
+                "slots": ["Monday evenings", "Thursday afternoons"],
+                "timezone": "IST",
+                "duration": "60 minutes"
+            },
+            "languages": ["English", "Mandarin"],
+            "rating": 4.8,
+            "testimonials": [
+                {
+                    "mentee": "Meera R.",
+                    "text": "Sarah's insights into product management were invaluable for my career switch.",
+                    "rating": 5
+                }
+            ]
+        },
+        {
+            "id": "MNT003",
+            "name": "Ritu Sharma",
+            "title": "Founder & CEO",
+            "company": "TechStartup India",
+            "experience": {
+                "years": 18,
+                "domains": ["Entrepreneurship", "Business Strategy", "Venture Capital"]
+            },
+            "expertise": {
+                "technical": ["Business Planning", "Fundraising", "Growth Strategy"],
+                "soft_skills": ["Networking", "Pitch Presentation", "Decision Making"]
+            },
+            "mentorship_focus": [
+                "Startup Guidance",
+                "Entrepreneurship",
+                "Fundraising"
+            ],
+            "availability": {
+                "slots": ["Wednesday evenings", "Friday mornings"],
+                "timezone": "IST",
+                "duration": "45 minutes"
+            },
+            "languages": ["English", "Hindi", "Gujarati"],
+            "rating": 4.9,
+            "testimonials": [
+                {
+                    "mentee": "Aisha P.",
+                    "text": "Ritu's mentorship was crucial in helping me launch my startup successfully.",
+                    "rating": 5
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "last_updated": "2024-02-15",
+        "total_programs": 3,
+        "categories": ["Executive Leadership", "Technology", "Career Transition"],
+        "formats": ["Virtual", "Hybrid"]
+    }
+} 

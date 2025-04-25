@@ -1,0 +1,68 @@
+[
+    {
+        "id": "1",
+        "title": "Software Development",
+        "description": "Career path in software development and engineering",
+        "levels": [
+            {
+                "level": "Entry",
+                "roles": ["Junior Developer", "Software Engineer I", "Associate Developer"],
+                "skills": ["Programming", "Version Control", "Testing"]
+            },
+            {
+                "level": "Mid",
+                "roles": ["Senior Developer", "Tech Lead", "Software Engineer III"],
+                "skills": ["System Design", "Code Review", "Mentoring"]
+            },
+            {
+                "level": "Senior",
+                "roles": ["Principal Engineer", "Software Architect", "Engineering Manager"],
+                "skills": ["Architecture", "Leadership", "Strategy"]
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "title": "Data Science",
+        "description": "Career path in data science and analytics",
+        "levels": [
+            {
+                "level": "Entry",
+                "roles": ["Junior Data Analyst", "Data Scientist I", "Research Assistant"],
+                "skills": ["Python", "SQL", "Statistics"]
+            },
+            {
+                "level": "Mid",
+                "roles": ["Senior Data Scientist", "ML Engineer", "Analytics Lead"],
+                "skills": ["Machine Learning", "Deep Learning", "Big Data"]
+            },
+            {
+                "level": "Senior",
+                "roles": ["Principal Data Scientist", "AI Architect", "Analytics Director"],
+                "skills": ["Research", "Strategy", "Team Leadership"]
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "title": "Product Management",
+        "description": "Career path in product management",
+        "levels": [
+            {
+                "level": "Entry",
+                "roles": ["Associate PM", "Product Analyst", "Junior PM"],
+                "skills": ["User Research", "Agile", "Analytics"]
+            },
+            {
+                "level": "Mid",
+                "roles": ["Senior PM", "Product Lead", "Technical PM"],
+                "skills": ["Strategy", "Stakeholder Management", "Roadmapping"]
+            },
+            {
+                "level": "Senior",
+                "roles": ["Director of Product", "VP of Product", "Chief Product Officer"],
+                "skills": ["Vision", "Executive Leadership", "Innovation"]
+            }
+        ]
+    }
+] 
