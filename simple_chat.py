@@ -199,7 +199,7 @@ class SimpleAsha:
 
             # Check for mentorship-related queries
             elif any(word in processed_input for word in ['mentor', 'guide', 'advice', 'guidance']):
-                mentors = self.knowledge_base.get_mentors()
+                mentors = self.knowledge_base.get_mentorship_programs()
                 if mentors:
                     response["text"] = "👩‍💻 Here are some mentorship opportunities:\n\n"
                     for mentor in mentors[:3]:
@@ -212,16 +212,23 @@ class SimpleAsha:
 
             # Check for education/course-related queries
             elif any(word in processed_input for word in ['course', 'training', 'learn', 'study', 'education']):
-                courses = self.knowledge_base.get_courses()
-                if courses:
-                    response["text"] = "📚 Here are some recommended courses:\n\n"
-                    for course in courses[:3]:
-                        response["text"] += f"• {course['title']}\n"
-                        response["text"] += f"  🕒 Duration: {course['duration']}\n"
-                        response["text"] += f"  💰 Fee: {course['fee']}\n\n"
-                    response["text"] += "Would you like more details about any of these courses?"
-                else:
-                    response["text"] = "I'm currently updating our course catalog. Please tell me what skills you'd like to develop!"
+                # Return information about digital marketing courses
+                response["text"] = "📚 Here are some recommended courses from JobsForHer Foundation:\n\n"
+                response["text"] += "1. Advanced Search Engine Optimization (SEO)\n"
+                response["text"] += "   🕒 Duration: 3 months\n"
+                response["text"] += "   💰 100% Scholarship Available\n\n"
+                response["text"] += "2. Advanced Pay Per Click (PPC) Program\n"
+                response["text"] += "   🕒 Duration: 3 months\n"
+                response["text"] += "   💰 100% Scholarship Available\n\n"
+                response["text"] += "3. Social Media & Digital Strategy\n"
+                response["text"] += "   🕒 Duration: 4 months\n"
+                response["text"] += "   💰 100% Scholarship Available\n\n"
+                response["text"] += "These courses are specifically designed for women returnees and include:\n"
+                response["text"] += "• Online, instructor-led format\n"
+                response["text"] += "• Self-paced learning\n"
+                response["text"] += "• Industry-recognized certification\n"
+                response["text"] += "• Career comeback support\n\n"
+                response["text"] += "Would you like more details about any of these courses?"
 
             # Default response if no specific intent is matched
             if not response["text"]:
