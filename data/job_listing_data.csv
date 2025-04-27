@@ -1,0 +1,4 @@
+job_id,title,company,location,type,description,requirements,benefits,women_friendly_policies
+1,Senior Software Engineer,TechCo,Bangalore,Full-time,"Lead development of cloud applications","5+ years experience,Python expertise","Health insurance,Flexible hours","Work from home,Maternity benefits"
+2,Product Manager,InnovateX,Mumbai,Full-time,"Drive product strategy and execution","3+ years PM experience","401k,Health coverage","Returnship program,Child care support"
+3,Data Scientist,DataTech,Delhi,Remote,"ML model development and deployment","ML expertise,Statistics background","Remote work,Stock options","Flexible schedule,Extended maternity leave"

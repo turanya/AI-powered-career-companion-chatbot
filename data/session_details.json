@@ -1,0 +1,36 @@
+{
+    "events": [
+        {
+            "id": "evt001",
+            "title": "Women in Tech Leadership Summit",
+            "date": "2025-05-15",
+            "location": "Bangalore",
+            "description": "Leadership development workshop for women in technology",
+            "registration_link": "https://example.com/tech-summit"
+        },
+        {
+            "id": "evt002",
+            "title": "Career Comeback Workshop",
+            "date": "2025-05-20",
+            "location": "Virtual",
+            "description": "Workshop for women returning to the workforce",
+            "registration_link": "https://example.com/comeback-workshop"
+        }
+    ],
+    "mentorship_programs": [
+        {
+            "id": "mnt001",
+            "title": "Tech Leadership Mentorship",
+            "duration": "3 months",
+            "area": "Technology Leadership",
+            "description": "One-on-one mentorship with tech leaders"
+        },
+        {
+            "id": "mnt002",
+            "title": "Career Transition Program",
+            "duration": "6 months",
+            "area": "Career Development",
+            "description": "Guidance for career transitions and growth"
+        }
+    ]
+}

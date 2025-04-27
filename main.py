@@ -1,5 +1,7 @@
-from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi import FastAPI, Request, HTTPException, Depends, status
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from datetime import datetime, timedelta
 from typing import Optional
@@ -7,14 +9,14 @@ import jwt
 from dotenv import load_dotenv
 import os
 from pydantic import BaseModel
-from chatbot import Chatbot
+from simple_chat import SimpleAsha
 
 # Load environment variables
 load_dotenv()
 
 app = FastAPI(
     title="Asha AI Chatbot",
-    description="An intelligent chatbot with advanced features",
+    description="An intelligent chatbot for career guidance",
     version="1.0.0"
 )
 
@@ -42,8 +44,11 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     username: Optional[str] = None
 
+class ChatMessage(BaseModel):
+    message: str
+
 # Initialize chatbot
-chatbot = Chatbot()
+chatbot = SimpleAsha()
 
 @app.post("/token", response_model=Token)
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
@@ -52,13 +57,23 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     access_token = create_access_token(data={"sub": form_data.username})
     return {"access_token": access_token, "token_type": "bearer"}
 
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    with open('index.html', 'r', encoding='utf-8') as f:
+        html_content = f.read()
+    return HTMLResponse(content=html_content)
+
 @app.post("/chat")
-async def chat(message: Message, token: str = Depends(oauth2_scheme)):
+async def chat(message: ChatMessage, token: str = Depends(oauth2_scheme)):
     try:
-        response = chatbot.process_message(message.content, message.session_id)
-        return {"response": response}
+        response = chatbot.get_response(message.message)
+        return JSONResponse(content={"response": response["text"]})
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Error: {str(e)}")
+        return JSONResponse(
+            content={"response": "I apologize, but I encountered an error. Please try again."},
+            status_code=500
+        )
 
 @app.get("/health")
 async def health_check():
@@ -80,4 +95,4 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000) 
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

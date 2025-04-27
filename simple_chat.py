@@ -1,5 +1,9 @@
 import json
+import random
 from datetime import datetime
+from typing import Dict, List, Optional
+from utils.bias_detector import BiasDetector
+from utils.knowledge_base import KnowledgeBase
 
 class SimpleAsha:
     def __init__(self):
@@ -63,57 +67,38 @@ class SimpleAsha:
             "company": "company",
             "platform": "platform"
         }
-
-        # Simple response templates
         self.responses = {
-            "greeting": [
-                "Hello! 👋 I'm Asha, your friendly career companion! How can I brighten your career journey today?",
-                "Hi there! ✨ I'm Asha, and I'm here to help you achieve your career dreams. What would you like to explore?",
-                "Welcome! 🌟 I'm excited to help you on your professional journey. How may I assist you today?"
+            'greeting': [
+                "Hello! I'm Asha, your AI career companion. How can I help you today?",
+                "Hi there! I'm Asha, here to assist with your career journey. What can I do for you?"
             ],
-            "about_website": [
-                "JobsForHer is India's largest platform dedicated to empowering women in their careers! 💪 Here's what makes us special:\n\n" +
-                "1. Job Opportunities: Thousands of verified jobs from women-friendly companies that value diversity\n" +
-                "2. Mentorship: Connect with inspiring women leaders who've walked the path\n" +
-                "3. Resources: Access to skill-building webinars, workshops, and learning programs\n" +
-                "4. Community: Join a supportive network of ambitious women professionals\n\n" +
-                "I'd love to tell you more! Just type the number (1-4) you're interested in, or ask me anything! 😊"
+            'job_search': [
+                "I can help you find relevant job opportunities. What kind of role are you looking for?",
+                "Let's explore job openings together. What's your preferred job category?"
             ],
-            "job_search": [
-                "Exciting opportunities await! 🚀 Here are the thriving sectors where we have amazing openings:\n\n" +
-                "1. Technology & IT (Software, Data, Product roles)\n" +
-                "2. HR & Recruitment (HR Manager, Talent Acquisition)\n" +
-                "3. Sales & Marketing (Digital Marketing, Business Development)\n" +
-                "4. Finance & Accounting (Financial Analyst, Accountant)\n" +
-                "5. Operations & Project Management\n\n" +
-                "Simply type a number (1-5) to explore jobs in that field, or tell me what you're looking for! 💼"
+            'education': [
+                "I can provide information about various educational programs and courses. What field interests you?",
+                "There are many learning opportunities available. Which subject would you like to know more about?"
             ],
-            "career_guidance": [
-                "I'm here to help you shine! ✨ Here's how we can support your growth:\n\n" +
-                "1. One-on-one mentorship with industry leaders\n" +
-                "2. Professional resume review and optimization\n" +
-                "3. Interview preparation and confidence building\n" +
-                "4. Career transition strategy and planning\n\n" +
-                "Type a number (1-4) to learn more about any option, or share what's on your mind! 🌟"
+            'professional_development': [
+                "Professional development is crucial for career growth. Would you like to explore mentorship programs or skill development courses?",
+                "I can help you find resources for professional growth. Are you interested in mentorship or specific skill development?"
             ],
-            "education": [
-                "Let's invest in your growth! 📚 Here are our learning pathways:\n\n" +
-                "1. Professional certification courses (Tech, Management, Finance)\n" +
-                "2. Skill development workshops\n" +
-                "3. Leadership development programs\n" +
-                "4. Technical training\n\n" +
-                "What skills would you like to develop?"
-            ],
-            "default": [
-                "Could you please tell me more about that?",
-                "I'm interested in hearing more details.",
-                "Could you elaborate on that?"
+            'default': [
+                "I'm here to help with your career journey. Could you please provide more details about what you're looking for?",
+                "I want to assist you better. Could you elaborate on your question?"
             ]
         }
+        
+        # Initialize components
+        self.bias_detector = BiasDetector()
+        self.knowledge_base = KnowledgeBase()
+        self.conversation_history = {}
+        self.analytics = {}
 
-    def translate_hinglish(self, text):
+    def translate_hinglish(self, text: str) -> str:
         """Convert Hinglish text to English"""
-        words = text.lower().split()
+        words = text.split()
         translated = []
         
         for word in words:
@@ -125,82 +110,161 @@ class SimpleAsha:
         
         return " ".join(translated)
 
-    def get_response(self, user_input):
-        """Generate a response based on user input."""
-        # First translate any Hinglish to English
-        user_input = self.translate_hinglish(user_input.lower())
+    def get_response(self, user_input: str, session_id: Optional[str] = None) -> Dict:
+        try:
+            # Initialize response dictionary
+            response = {"text": "", "type": "text"}
 
-        # Initialize last_context if not exists
-        if not hasattr(self, 'last_context'):
-            self.last_context = None
-            
-        # Handle numerical inputs for different sections
-        if user_input.isdigit():
-            num = int(user_input)
-            if self.last_context == "about_website":
-                if num == 1:
-                    return {"text": "✨ Our job opportunities are carefully curated from women-friendly companies that promote diversity and inclusion. You'll find flexible work options, return-to-work programs, and roles across experience levels. Would you like to explore current openings? (Type 'jobs' or '1' to see opportunities)"}
-                elif num == 2:
-                    return {"text": "🌟 Our mentorship program connects you with successful women leaders who can guide your career journey. They provide personalized advice, share their experiences, and help you overcome challenges. Would you like to know more about mentorship? (Type 'mentor' or '2' to learn more)"}
-                elif num == 3:
-                    return {"text": "📚 We offer a variety of learning resources to help you upskill and grow. From technical workshops to leadership programs, we've got your development covered. What skills are you looking to develop? (Type 'courses' or '3' to explore)"}
-                elif num == 4:
-                    return {"text": "👥 Our community is your support system! Connect with like-minded professionals, share experiences, and grow together. Join discussions, networking events, and success story sessions. Ready to connect? (Type 'community' or '4' to join)"}
-            elif self.last_context == "education":
-                edu_responses = {
-                    1: "🎓 Our Professional Certification Courses include:\n- Cloud Computing & DevOps\n- Product Management\n- Digital Marketing\n- Financial Analysis\n- Data Science & AI\n\nWhich field interests you? Just tell me the area you'd like to explore!",
-                    2: "💡 Our Skill Development Workshops cover:\n- Communication & Presentation\n- Time Management\n- Project Management\n- Negotiation Skills\n- Problem Solving\n\nWould you like to know the upcoming workshop schedule?",
-                    3: "👑 Leadership Development Programs include:\n- Executive Leadership\n- Team Management\n- Strategic Thinking\n- Decision Making\n- Change Management\n\nReady to develop your leadership skills?",
-                    4: "💻 Technical Training programs cover:\n- Programming Languages\n- Web Development\n- Database Management\n- Cybersecurity\n- Cloud Technologies\n\nWhich technical skills would you like to develop?"
+            # Track analytics
+            if session_id not in self.analytics:
+                self.analytics[session_id] = {
+                    "total_interactions": 0,
+                    "biased_queries": 0,
+                    "successful_responses": 0
                 }
-                return {"text": edu_responses.get(num, "Please select a number between 1-4 for learning pathways! 😊")}
-            
-            elif self.last_context == "career_guidance":
-                guidance_responses = {
-                    1: "🌟 Our mentorship program pairs you with experienced leaders who provide:\n- Career path guidance\n- Industry insights\n- Personal growth strategies\n- Network expansion\n\nWould you like to explore available mentors?",
-                    2: "📝 Our resume review service includes:\n- Professional formatting\n- Content optimization\n- Keyword optimization\n- ATS compatibility check\n- Personal branding tips\n\nReady to make your resume stand out?",
-                    3: "🎯 Interview preparation includes:\n- Mock interviews\n- Common questions practice\n- Body language tips\n- Salary negotiation skills\n- Industry-specific prep\n\nWould you like to schedule a practice session?",
-                    4: "🔄 Career transition support offers:\n- Skills gap analysis\n- Industry research\n- Transition timeline planning\n- Networking strategies\n- Personal branding\n\nReady to plan your career transition?"
-                }
-                return {"text": guidance_responses.get(num, "Please select a number between 1-4 for guidance options! 😊")}
-            
-            elif self.last_context == "job_search":
-                job_responses = {
-                    1: "💻 In Technology & IT, we have exciting roles in:\n- Software Development\n- Data Science\n- Product Management\n- UI/UX Design\n\nWould you like me to show you the latest tech opportunities?",
-                    2: "👥 Our HR & Recruitment positions include:\n- HR Business Partner\n- Talent Acquisition Specialist\n- Learning & Development Manager\n- Employee Relations\n\nShall I share some current HR openings with you?",
-                    3: "📈 In Sales & Marketing, we offer roles in:\n- Digital Marketing\n- Content Strategy\n- Business Development\n- Brand Management\n\nWould you like to see our marketing opportunities?",
-                    4: "💰 Finance & Accounting positions include:\n- Financial Analyst\n- Account Manager\n- Investment Advisory\n- Risk Management\n\nInterested in exploring these roles?",
-                    5: "📋 Operations & Project Management roles:\n- Project Manager\n- Operations Lead\n- Process Improvement\n- Team Leadership\n\nWould you like to see current openings?"
-                }
-                return {"text": job_responses.get(num, "I'm sorry, please select a number between 1-5 for job categories! 😊")}
+            self.analytics[session_id]["total_interactions"] += 1
 
-        # Check for website/about queries
-        if any(word in user_input for word in ['about', 'website', 'platform', 'jobsforher', 'tell me', 'what is']):
-            self.last_context = "about_website"
-            return {"text": self.responses["about_website"][0]}
+            # Translate Hinglish to English
+            processed_input = self.translate_hinglish(user_input.lower())
 
-        # Check for job-related queries
-        elif any(word in user_input for word in ['job', 'work', 'career', 'position', 'employment', 'salary', 'money']):
-            self.last_context = "job_search"
-            return {"text": self.responses["job_search"][0]}
+            # Check for bias
+            has_bias, biases, suggestions = self.bias_detector.detect_bias(processed_input)
+            if has_bias:
+                self.analytics[session_id]["biased_queries"] += 1
+                return {"text": f"I noticed some potential bias in your query. Here's a more inclusive way to phrase it: {suggestions[0]}"}
 
-        # Check for education/course related queries
-        elif any(word in user_input for word in ['course', 'study', 'education', 'learn', 'training']):
-            self.last_context = "education"
-            return {"text": self.responses["education"][0]}
+            # Check for greetings
+            if any(word in processed_input for word in ['hi', 'hello', 'hey', 'namaste']):
+                return {"text": "👋 Hello! I'm Asha, your AI career companion. I can help you with:\n\n" + \
+                        "1. Finding job opportunities\n" + \
+                        "2. Career guidance and mentorship\n" + \
+                        "3. Professional development courses\n" + \
+                        "4. Upcoming events and workshops\n" + \
+                        "5. Women returnee programs\n\n" + \
+                        "What would you like to explore?"}
 
-        # Check for career guidance
-        elif any(word in user_input for word in ['guide', 'advice', 'mentor', 'guidance', 'help']):
-            self.last_context = "career_guidance"
-            return {"text": self.responses["career_guidance"][0]}
+            # Check for yes/no responses
+            if processed_input in ['yes', 'yeah', 'sure', 'okay', 'ok', 'yep', 'yup', 'ha', 'haan']:
+                return {"text": "Great! Let me help you explore your career options. Are you interested in:\n\n" + \
+                        "1. Job Search & Opportunities\n" + \
+                        "2. Skill Development & Training\n" + \
+                        "3. Mentorship & Guidance\n" + \
+                        "4. Events & Networking\n\n" + \
+                        "Please choose a number or tell me what you're looking for! 🌟"}
 
-        # Check for greetings
-        elif any(word in user_input for word in ['hello', 'hi', 'hey', 'greetings', 'namaste']):
-            self.last_context = "greeting"
-            return {"text": self.responses["greeting"][0]}
+            if processed_input in ['no', 'nah', 'nope', 'not', 'nahi']:
+                return {"text": "No problem! Feel free to ask me about:\n\n" + \
+                        "• Job opportunities\n" + \
+                        "• Career development\n" + \
+                        "• Professional courses\n" + \
+                        "• Mentorship programs\n" + \
+                        "• Upcoming events\n\n" + \
+                        "I'm here to help! 😊"}
 
-        # Default response
-        return {"text": self.responses["default"][0]}
+            # Check for help queries
+            if 'help' in processed_input or 'what can you do' in processed_input:
+                return {"text": "I'm here to help with your career journey! You can ask me about:\n\n" + \
+                        "• Job opportunities & openings\n" + \
+                        "• Career guidance & planning\n" + \
+                        "• Professional development\n" + \
+                        "• Mentorship programs\n" + \
+                        "• Upcoming events 📅\n\n" + \
+                        "What would you like to explore?"}
+
+            # Check for job-related queries
+            if any(word in processed_input for word in ['job', 'work', 'career', 'opportunity', 'position', 'opening', 'vacancy']):
+                job_listings = self.knowledge_base.get_job_listings()
+                if job_listings:
+                    response["text"] = "💼 Here are some exciting job opportunities:\n\n"
+                    for job in job_listings[:3]:
+                        response["text"] += f"• {job['title']} at {job['company']}\n"
+                        response["text"] += f"  📍 Location: {job['location']}\n"
+                        response["text"] += f"  💵 {job['salary']}\n\n"
+                    response["text"] += "Would you like to know more about any of these positions?"
+                else:
+                    response["text"] = "I'm currently updating our job listings. Please check back in a few minutes or tell me what kind of job you're looking for!"
+
+            # Check for event-related queries
+            elif any(word in processed_input for word in ['event', 'workshop', 'webinar', 'conference']):
+                events = self.knowledge_base.get_events()
+                if events:
+                    response["text"] = "📅 Here are upcoming events you might be interested in:\n\n"
+                    for event in events[:3]:
+                        response["text"] += f"• {event['title']}\n"
+                        response["text"] += f"  📆 Date: {event['date']}\n"
+                        response["text"] += f"  📍 {event['location']}\n\n"
+                    response["text"] += "Would you like to register for any of these events?"
+                else:
+                    response["text"] = "I'm currently updating our event calendar. Please check back soon for exciting events and workshops!"
+
+            # Check for mentorship-related queries
+            elif any(word in processed_input for word in ['mentor', 'guide', 'advice', 'guidance']):
+                mentors = self.knowledge_base.get_mentors()
+                if mentors:
+                    response["text"] = "👩‍💻 Here are some mentorship opportunities:\n\n"
+                    for mentor in mentors[:3]:
+                        response["text"] += f"• {mentor['name']} - {mentor['expertise']}\n"
+                        response["text"] += f"  💼 Experience: {mentor['experience']} years\n"
+                        response["text"] += f"  🎓 {mentor['background']}\n\n"
+                    response["text"] += "Would you like to connect with any of these mentors?"
+                else:
+                    response["text"] = "I'm currently updating our mentor database. In the meantime, would you like to tell me what kind of mentorship you're looking for?"
+
+            # Check for education/course-related queries
+            elif any(word in processed_input for word in ['course', 'training', 'learn', 'study', 'education']):
+                courses = self.knowledge_base.get_courses()
+                if courses:
+                    response["text"] = "📚 Here are some recommended courses:\n\n"
+                    for course in courses[:3]:
+                        response["text"] += f"• {course['title']}\n"
+                        response["text"] += f"  🕒 Duration: {course['duration']}\n"
+                        response["text"] += f"  💰 Fee: {course['fee']}\n\n"
+                    response["text"] += "Would you like more details about any of these courses?"
+                else:
+                    response["text"] = "I'm currently updating our course catalog. Please tell me what skills you'd like to develop!"
+
+            # Default response if no specific intent is matched
+            if not response["text"]:
+                response["text"] = "I'm here to help with your career journey! You can ask me about:\n\n" + \
+                                "• Job opportunities & openings\n" + \
+                                "• Career guidance & planning\n" + \
+                                "• Professional development\n" + \
+                                "• Mentorship programs\n" + \
+                                "• Upcoming events 📅\n\n" + \
+                                "What would you like to explore?"
+
+            # Track successful response
+            self.analytics[session_id]["successful_responses"] += 1
+
+            # Store conversation history
+            if session_id not in self.conversation_history:
+                self.conversation_history[session_id] = []
+            self.conversation_history[session_id].append({
+                "user_input": user_input,
+                "response": response["text"] if response["text"] else "I'm here to help! Please let me know what you're looking for.",
+                "timestamp": datetime.now().isoformat()
+            })
+
+            return response
+
+        except Exception as e:
+            print(f"Error processing request: {str(e)}")
+            return {"text": "I apologize, but I encountered an error. Please try rephrasing your question or contact support if the issue persists."}
+
+    def get_analytics(self, session_id: Optional[str] = None) -> Dict:
+        """Get analytics data for a session or all sessions."""
+        if session_id:
+            return self.analytics.get(session_id, {})
+        return {
+            "total_sessions": len(self.analytics),
+            "total_interactions": sum(s["total_interactions"] for s in self.analytics.values()),
+            "total_biased_queries": sum(s["biased_queries"] for s in self.analytics.values()),
+            "successful_responses": sum(s["successful_responses"] for s in self.analytics.values())
+        }
+
+    def get_conversation_history(self, session_id: str) -> List[Dict]:
+        """Get conversation history for a session."""
+        return self.conversation_history.get(session_id, [])
 
 def main():
     asha = SimpleAsha()
