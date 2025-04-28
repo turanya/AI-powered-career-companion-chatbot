@@ -8,6 +8,7 @@ from functools import wraps
 import backoff
 from ratelimit import limits, sleep_and_retry
 
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -44,7 +45,7 @@ class RateLimiter:
             return func(*args, **kwargs)
         return wrapper
 
-class JobAPIIntegration:
+class BaseAPIIntegration:
     def __init__(self, config: APIConfig):
         self.config = config
         self.rate_limiter = RateLimiter(config.rate_limit, 60)  # 60 seconds
@@ -73,6 +74,10 @@ class JobAPIIntegration:
         except requests.exceptions.RequestException as e:
             logger.error(f"API request failed: {str(e)}")
             raise
+
+class JobAPIIntegration(BaseAPIIntegration):
+    def __init__(self, config: APIConfig):
+        super().__init__(config)
 
     def get_job_listings(self, 
                         query: Optional[str] = None,
@@ -103,9 +108,34 @@ class JobAPIIntegration:
         """Search for jobs by company name"""
         return self._make_request('GET', '/jobs/search', params={'company': company_name})
 
-class JobAPIAggregator:
-    def __init__(self, api_configs: List[APIConfig]):
-        self.apis = [JobAPIIntegration(config) for config in api_configs]
+class EventAPIIntegration(BaseAPIIntegration):
+    def get_events(self, filters: Optional[Dict] = None) -> Dict:
+        """Get events with optional filters"""
+        return self._make_request('GET', '/events', params=filters)
+
+    def get_event_details(self, event_id: str) -> Dict:
+        """Get detailed information about a specific event"""
+        return self._make_request('GET', f'/events/{event_id}')
+
+    def register_for_event(self, event_id: str, user_data: Dict) -> Dict:
+        """Register a user for an event"""
+        return self._make_request('POST', f'/events/{event_id}/register', params=user_data)
+
+class ProfessionalDevelopmentAPIIntegration(BaseAPIIntegration):
+    def get_programs(self, filters: Optional[Dict] = None) -> Dict:
+        """Get professional development programs with optional filters"""
+        return self._make_request('GET', '/programs', params=filters)
+
+    def get_program_details(self, program_id: str) -> Dict:
+        """Get detailed information about a specific program"""
+        return self._make_request('GET', f'/programs/{program_id}')
+
+    def enroll_in_program(self, program_id: str, user_data: Dict) -> Dict:
+        """Enroll a user in a program"""
+        return self._make_request('POST', f'/programs/{program_id}/enroll', params=user_data)
+
+class BaseAggregator:
+    def __init__(self):
         self.cache = {}
         self.cache_ttl = 300  # 5 minutes
 
@@ -126,6 +156,11 @@ class JobAPIAggregator:
     def _update_cache(self, cache_key: str, data: Dict):
         """Update cache with new data"""
         self.cache[cache_key] = (datetime.now(), data)
+
+class JobAPIAggregator(BaseAggregator):
+    def __init__(self, api_configs: List[APIConfig]):
+        super().__init__()
+        self.apis = [JobAPIIntegration(config) for config in api_configs]
 
     def get_job_listings(self, 
                         query: Optional[str] = None,

@@ -193,6 +193,253 @@ class Chatbot:
                 "action": None
             }
     
+    def _handle_events(self, intent_data: Dict[str, Any], session_id: str) -> Dict[str, Any]:
+    """Handle event-related queries with context awareness and smart filtering."""
+    try:
+        entities = intent_data.get("entities", {})
+        context = self.session_manager.get_context(session_id)
+        
+        # Build filters from entities and context
+        filters = {}
+        
+        # Event type filter
+        event_types = {'conference', 'workshop', 'training', 'webinar', 'meetup'}
+        for word in intent_data.get('text', '').lower().split():
+            if word in event_types:
+                filters['type'] = word.title()
+        
+        # Format preference (virtual/in-person/hybrid)
+        format_keywords = {
+            'virtual': ['virtual', 'online', 'remote', 'zoom'],
+            'in-person': ['in-person', 'offline', 'venue', 'location'],
+            'hybrid': ['hybrid', 'both']
+        }
+        for format_type, keywords in format_keywords.items():
+            if any(word in intent_data.get('text', '').lower() for word in keywords):
+                filters['format'] = format_type.title()
+        
+        # Location filter
+        locations = entities.get('locations', [])
+        if locations:
+            filters['location'] = locations[0]
+        
+        # Date filter from context or entities
+        date_keywords = entities.get('date_keywords', [])
+        if 'next week' in date_keywords:
+            filters['date_from'] = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
+            filters['date_to'] = (datetime.now() + timedelta(days=7)).strftime('%Y-%m-%d')
+        elif 'next month' in date_keywords:
+            filters['date_from'] = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
+            filters['date_to'] = (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d')
+        
+        # Get filtered events
+        events = self.data_manager.get_events(filters)
+        
+        if not events:
+            suggestion = ""
+            if filters:
+                # Remove one filter at a time to provide alternatives
+                for key in list(filters.keys()):
+                    temp_filters = filters.copy()
+                    del temp_filters[key]
+                    alternative_events = self.data_manager.get_events(temp_filters)
+                    if alternative_events:
+                        suggestion = f"\n\nHowever, I found some events if we remove the {key} filter. Would you like to see those instead?"
+                        break
+            
+            return {
+                "text": f"I don't see any events matching your criteria.{suggestion}",
+                "action": None
+            }
+        
+        # Sort events by date
+        events = sorted(events, key=lambda x: x.get('date', {}).get('start', '9999'))
+        
+        response = "Here are some upcoming events that match your interests:\n\n"
+        for event in events[:3]:  # Show top 3 matches
+            date = event.get('date', {})
+            location = event.get('location', {})
+            format_str = f" ({event['format']})" if event.get('format') else ""
+            venue = f" at {location.get('venue')}" if location.get('venue') else ""
+            city = f" in {location.get('city')}" if location.get('city') else ""
+            
+            response += f"- {event['title']}{format_str} on {date.get('start')}{venue}{city}\n"
+            response += f"  {event['description']}\n"
+            if event.get('registration', {}).get('fee'):
+                fee = event['registration']['fee']
+                response += f"  Fee: {fee['amount']} {fee['currency']}"
+                if fee.get('early_bird_discount'):
+                    response += " (Early bird discount available)"
+                response += "\n"
+        
+        total_events = len(events)
+        if total_events > 3:
+            response += f"\nI found {total_events} events in total. Would you like to see more?"
+        
+        response += "\nWould you like to register for any of these events?"
+        
+        # Update session context
+        self.session_manager.update_context(session_id, {
+            'last_events': events[:3],
+            'event_filters': filters,
+            'total_events': total_events
+        })
+        
+        return {"text": response, "action": None}
+    except Exception as e:
+        logger.error(f"Error handling events: {str(e)}")
+        return {
+            "text": "I apologize, but I encountered an error retrieving events. Please try again.",
+            "action": None
+        }    }
+    
+    def _handle_professional_development(self, intent_data: Dict[str, Any], session_id: str) -> Dict[str, Any]:
+    """Handle professional development queries with personalized recommendations."""
+    try:
+        entities = intent_data.get("entities", {})
+        context = self.session_manager.get_context(session_id)
+        user_profile = context.get('user_profile', {})
+        
+        # Build filters from entities, context, and user profile
+        filters = {}
+        
+        # Program type filter
+        program_types = {
+            'leadership': ['leadership', 'management', 'executive'],
+            'technical': ['technical', 'coding', 'programming', 'development'],
+            'entrepreneurship': ['entrepreneur', 'business', 'startup']
+        }
+        
+        text = intent_data.get('text', '').lower()
+        for prog_type, keywords in program_types.items():
+            if any(word in text for word in keywords):
+                filters['type'] = prog_type
+                break
+        
+        # Format preference
+        format_keywords = {
+            'virtual': ['virtual', 'online', 'remote'],
+            'in-person': ['in-person', 'offline', 'classroom'],
+            'hybrid': ['hybrid', 'blended', 'flexible']
+        }
+        for format_type, keywords in format_keywords.items():
+            if any(word in text for word in keywords):
+                filters['format'] = format_type
+                break
+        
+        # Duration preference
+        duration_keywords = {
+            'short': ['quick', 'short', 'brief'],
+            'medium': ['medium', 'regular'],
+            'long': ['long', 'extensive', 'comprehensive']
+        }
+        for duration, keywords in duration_keywords.items():
+            if any(word in text for word in keywords):
+                filters['duration'] = duration
+                break
+        
+        # Topic preference from user profile or query
+        topics = set()
+        if user_profile.get('interests'):
+            topics.update(user_profile['interests'])
+        if user_profile.get('skill_gaps'):
+            topics.update(user_profile['skill_gaps'])
+        if entities.get('skills'):
+            topics.update(entities['skills'])
+        
+        if topics:
+            filters['topic'] = list(topics)[0]  # Use the first topic as filter
+        
+        # Get filtered programs
+        programs = self.data_manager.get_programs(filters)
+        
+        if not programs:
+            suggestion = ""
+            if filters:
+                # Try removing filters one by one to find alternatives
+                for key in list(filters.keys()):
+                    temp_filters = filters.copy()
+                    del temp_filters[key]
+                    alternative_programs = self.data_manager.get_programs(temp_filters)
+                    if alternative_programs:
+                        suggestion = f"\n\nHowever, I found some programs if we remove the {key} requirement. Would you like to see those instead?"
+                        break
+            
+            return {
+                "text": f"I couldn't find any programs matching your specific criteria.{suggestion}\n\nWhat specific skills or areas would you like to develop?",
+                "action": None
+            }
+        
+        response = "Here are some professional development programs that match your interests:\n\n"
+        for program in programs[:3]:  # Show top 3 matches
+            response += f"- {program['title']} ({program['format']}, {program['duration']})\n"
+            response += f"  {program['description']}\n"
+            
+            # Show modules
+            if program.get('modules'):
+                response += "  Key topics:\n"
+                for module in program['modules'][:2]:  # Show first 2 modules
+                    response += f"    - {module['title']}\n"
+                if len(program['modules']) > 2:
+                    response += "    - ...and more\n"
+            
+            # Show benefits
+            if program.get('benefits'):
+                response += "  Benefits: " + ", ".join(program['benefits'][:3])
+                if len(program['benefits']) > 3:
+                    response += ", and more"
+                response += "\n"
+            
+            response += "\n"
+        
+        total_programs = len(programs)
+        if total_programs > 3:
+            response += f"I found {total_programs} programs in total. Would you like to see more?\n"
+        
+        response += "\nWould you like more details about any of these programs?"
+        
+        # Update session context
+        self.session_manager.update_context(session_id, {
+            'last_programs': programs[:3],
+            'program_filters': filters,
+            'total_programs': total_programs
+        })
+        
+        return {"text": response, "action": None}
+    except Exception as e:
+        logger.error(f"Error handling professional development: {str(e)}")
+        return {
+            "text": "I apologize, but I encountered an error retrieving professional development programs. Please try again.",
+            "action": None
+        }    }
+    
+    def _handle_signin(self, intent_data: Dict[str, Any], session_id: str) -> Dict[str, Any]:
+        """Handle sign-in related queries."""
+        try:
+            if not session_id:
+                return {
+                    "text": "Please sign in to access all features. Would you like to create an account or sign in?",
+                    "action": "signup"
+                }
+                
+            user_data = self.session_manager.get_user_data(session_id)
+            if not user_data:
+                return {
+                    "text": "Your session has expired. Would you like to sign in again?",
+                    "action": "signin"
+                }
+                
+            return {
+                "text": f"Welcome back! How can I help you today?",
+                "action": None
+            }
+        except Exception as e:
+            logger.error(f"Error handling signin: {str(e)}")
+            return {
+                "text": "I apologize, but I encountered an error with the sign-in process. Please try again.",
+                "action": None
+            }
+    
     def _handle_education_query(self, intent_data: Dict[str, Any], session_id: str) -> Dict[str, Any]:
         """Handle education related queries."""
         try:
@@ -328,13 +575,41 @@ class DataManager:
         self.success_stories = []
         self.career_paths = []
         self.skills_data = []
-        self.api_manager = APIManager()
+        
+        # Initialize API managers
+        self.job_api = JobAPIAggregator([APIConfig(
+            base_url='https://api.jobsforher.com/v1',
+            api_key=os.getenv('JOBSFORHER_API_KEY'),
+            rate_limit=30,
+            retry_attempts=3,
+            timeout=10,
+            headers={'Accept': 'application/json'}
+        )])
+        
+        self.event_api = EventAPIAggregator([APIConfig(
+            base_url='https://api.jobsforher.com/v1',
+            api_key=os.getenv('JOBSFORHER_API_KEY'),
+            rate_limit=30,
+            retry_attempts=3,
+            timeout=10,
+            headers={'Accept': 'application/json'}
+        )])
+        
+        self.pd_api = ProfessionalDevelopmentAPIAggregator([APIConfig(
+            base_url='https://api.jobsforher.com/v1',
+            api_key=os.getenv('JOBSFORHER_API_KEY'),
+            rate_limit=30,
+            retry_attempts=3,
+            timeout=10,
+            headers={'Accept': 'application/json'}
+        )])
+        
         self.security_manager = SecurityManager()
     
     def load_data(self):
         try:
             # Load job listings from API with security measures
-            jobs_data = self.api_manager.get_jobs()
+            jobs_data = self.job_api.get_job_listings()
             self.job_listings = self.security_manager.anonymize_data(jobs_data)
             
             # Load events from API with security measures
@@ -721,10 +996,24 @@ class DataManager:
             return [job for job in self.job_listings if all(job.get(k) == v for k, v in filters.items())]
         return self.job_listings
     
-    def get_events(self, filters: Dict = None) -> List[Dict]:
-        if filters:
-            return [event for event in self.events if all(event.get(k) == v for k, v in filters.items())]
-        return self.events
+    def get_events(self, filters: Optional[Dict] = None) -> List[Dict]:
+        """Get events with smart filtering"""
+        try:
+            # Try getting events from API first
+            events_data = self.event_api.get_events(filters)
+            if events_data and events_data.get('results'):
+                return events_data['results']
+            
+            # Fallback to local data if API fails
+            if filters:
+                return [event for event in self.events if all(event.get(k) == v for k, v in filters.items())]
+            return self.events
+        except Exception as e:
+            logger.error(f"Error getting events: {str(e)}")
+            # Fallback to local data
+            if filters:
+                return [event for event in self.events if all(event.get(k) == v for k, v in filters.items())]
+            return self.events
     
     def get_mentorship_opportunities(self, filters: Dict = None) -> List[Dict]:
         if filters:
@@ -736,10 +1025,30 @@ class DataManager:
             return self.faqs[category]
         return [faq for category in self.faqs.values() for faq in category]
     
-    def get_resources(self, category: str = None) -> List[Dict]:
-        if category and category in self.resources:
-            return self.resources[category]
-        return [resource for category in self.resources.values() for resource in category]
+    def get_programs(self, filters: Optional[Dict] = None) -> List[Dict]:
+        """Get professional development programs with smart filtering"""
+        try:
+            # Try getting programs from API first
+            programs_data = self.pd_api.get_programs(filters)
+            if programs_data and programs_data.get('results'):
+                return programs_data['results']
+            
+            # Fallback to local data if API fails
+            programs = self.resources.get('professional_development', [])
+            if filters:
+                return [prog for prog in programs if all(prog.get(k) == v for k, v in filters.items())]
+            return programs
+        except Exception as e:
+            logger.error(f"Error getting programs: {str(e)}")
+            # Fallback to local data
+            programs = self.resources.get('professional_development', [])
+            if filters:
+                return [prog for prog in programs if all(prog.get(k) == v for k, v in filters.items())]
+            return programs
+            
+    def get_resources(self, resource_type: str) -> List[Dict]:
+        """Get resources by type"""
+        return self.resources.get(resource_type, [])
     
     def get_success_stories(self, industry: str = None) -> List[Dict]:
         if industry:
@@ -1245,6 +1554,21 @@ class NaturalLanguageProcessor:
         job_terms = {'job', 'career', 'work', 'employment', 'position'}
         if any(term in text.lower() for term in job_terms):
             return 'job_search'
+            
+        # Check for event-related terms
+        event_terms = {'event', 'workshop', 'session', 'webinar', 'conference', 'meetup'}
+        if any(term in text.lower() for term in event_terms):
+            return 'events'
+            
+        # Check for professional development terms
+        professional_development_terms = {'development', 'training', 'upskill', 'certification', 'course', 'program'}
+        if any(term in text.lower() for term in professional_development_terms):
+            return 'professional_development'
+            
+        # Check for sign-in related terms
+        signin_terms = {'signin', 'login', 'sign in', 'log in', 'account'}
+        if any(term in text.lower() for term in signin_terms):
+            return 'signin'
             
         # Check for education-related terms
         edu_terms = {'study', 'learn', 'course', 'education', 'training'}
