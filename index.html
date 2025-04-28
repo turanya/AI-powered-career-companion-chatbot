@@ -4,19 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobsForHer Foundation - Empowering Women's Careers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #6b3fa0;
+            --primary-color: #8e44ad;
             --secondary-color: #ff6b6b;
-            --text-color: #333;
-            --light-bg: #f9f9f9;
+            --accent-color: #2ecc71;
+            --text-color: #2c3e50;
+            --light-bg: #f8f9fa;
+            --gradient-primary: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --border-radius: 12px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         body {
@@ -159,69 +177,130 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 350px;
-            height: 500px;
+            width: 380px;
+            height: 600px;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
             z-index: 1000;
             display: flex;
             flex-direction: column;
+            animation: fadeIn 0.3s ease-out;
+            border: 1px solid rgba(142, 68, 173, 0.1);
         }
 
         .chat-header {
-            background: var(--primary-color);
+            background: var(--gradient-primary);
             color: white;
-            padding: 1rem;
-            border-radius: 10px 10px 0 0;
+            padding: 1.2rem;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chat-header span:first-child {
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-header span:first-child::before {
+            content: '🤖';
+            font-size: 1.2rem;
+            animation: float 3s ease-in-out infinite;
         }
 
         .chat-messages {
             flex-grow: 1;
-            padding: 1rem;
+            padding: 1.5rem;
             overflow-y: auto;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
 
         .chat-input {
-            padding: 1rem;
-            border-top: 1px solid #eee;
+            padding: 1.2rem;
+            background: white;
+            border-top: 1px solid rgba(0,0,0,0.05);
             display: flex;
+            gap: 10px;
+            box-shadow: var(--shadow-sm);
             gap: 0.5rem;
         }
 
         .chat-input input {
             flex-grow: 1;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 0.8rem 1rem;
+            border: 2px solid rgba(142, 68, 173, 0.1);
+            border-radius: var(--border-radius);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
         }
 
         .chat-input button {
-            padding: 0.5rem 1rem;
-            background: var(--primary-color);
+            padding: 0.8rem 1.5rem;
+            background: var(--gradient-primary);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: var(--border-radius);
             cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .chat-input button:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .chat-input button:active {
+            transform: translateY(0);
         }
 
         .chat-toggle {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--primary-color);
+            width: 65px;
+            height: 65px;
+            background: var(--gradient-primary);
             color: white;
-            padding: 1rem;
             border-radius: 50%;
             cursor: pointer;
             z-index: 999;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
         }
     </style>
 </head>
@@ -365,12 +444,27 @@
             const chatMessages = document.getElementById('chatMessages');
             const messageDiv = document.createElement('div');
             messageDiv.style.marginBottom = '10px';
-            messageDiv.style.padding = '8px 12px';
-            messageDiv.style.borderRadius = '8px';
-            messageDiv.style.maxWidth = '80%';
+            messageDiv.style.padding = '12px 16px';
+            messageDiv.style.borderRadius = '18px';
+            messageDiv.style.maxWidth = '85%';
             messageDiv.style.alignSelf = isUser ? 'flex-end' : 'flex-start';
-            messageDiv.style.backgroundColor = isUser ? '#6b3fa0' : '#f0f0f0';
-            messageDiv.style.color = isUser ? 'white' : 'black';
+            messageDiv.style.backgroundColor = isUser ? '#8e44ad' : '#ffffff';
+            messageDiv.style.color = isUser ? 'white' : '#2c3e50';
+            messageDiv.style.boxShadow = '0 2px 5px rgba(0,0,0,0.05)';
+            messageDiv.style.fontSize = '0.95rem';
+            messageDiv.style.lineHeight = '1.5';
+            messageDiv.style.animation = 'fadeIn 0.3s ease-out';
+            messageDiv.style.border = isUser ? 'none' : '1px solid rgba(0,0,0,0.05)';
+            
+            // Format message with emojis
+            if (!isUser) {
+                message = message.replace(/^Hello!/, 'Hello! 👋');
+                message = message.replace(/career/gi, 'career 🚀');
+                message = message.replace(/job/gi, 'job 💼');
+                message = message.replace(/course/gi, 'course 📚');
+                message = message.replace(/mentor/gi, 'mentor 🌟');
+            }
+            
             messageDiv.textContent = message;
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
