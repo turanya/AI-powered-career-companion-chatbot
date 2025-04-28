@@ -1,0 +1,28 @@
+{
+    "faqs": [
+        {
+            "question": "What is JobsForHer Foundation?",
+            "answer": "JobsForHer Foundation is a Charitable Trust launched in 2018, dedicated to enhancing women's status in the workplace. Located in Bengaluru, the foundation promotes positive transformation and equal opportunities for women throughout India."
+        },
+        {
+            "question": "What is herShakti?",
+            "answer": "herShakti is a first-of-its kind government-industry consortium to upskill women in emerging technologies. It offers training in AI/ML, Big Data, Blockchain, Cybersecurity, IPA, and Cloud computing. The program is specifically designed for returnee women and starters."
+        },
+        {
+            "question": "What is DivHERsity.club?",
+            "answer": "DivHERsity.club is a member-only community for leaders focused on workplace diversity and inclusion. It's open to D&I leaders, HR professionals, and executives interested in promoting workplace diversity."
+        },
+        {
+            "question": "What upskilling programs are available?",
+            "answer": "The foundation offers various upskilling programs including: AI/ML, Big Data, Blockchain, Cybersecurity, IPA, and Cloud computing. These are offered through partnerships with organizations like KDEM, Infosys, UI Path, and Broadridge."
+        },
+        {
+            "question": "How can I update my profile?",
+            "answer": "You can update your profile through your account dashboard. Click on 'My Profile' and you can edit your personal information, professional details, skills, and preferences."
+        },
+        {
+            "question": "How do I sign up for programs?",
+            "answer": "To sign up for programs: 1) Create an account or log in, 2) Browse available programs under 'Programs & Events', 3) Click 'Register' on your chosen program, 4) Complete the application form, 5) Submit and wait for confirmation."
+        }
+    ]
+}

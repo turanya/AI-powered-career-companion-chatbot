@@ -48,7 +48,7 @@ class ChatMessage(BaseModel):
     message: str
 
 # Initialize chatbot
-chatbot = SimpleAsha()
+chatbot = SimpleAsha(data_dir="data")
 
 @app.post("/token", response_model=Token)
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):

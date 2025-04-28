@@ -2,11 +2,25 @@ import json
 import random
 from datetime import datetime
 from typing import Dict, List, Optional
+from pathlib import Path
 from utils.bias_detector import BiasDetector
 from utils.knowledge_base import KnowledgeBase
 
 class SimpleAsha:
-    def __init__(self):
+    def __init__(self, data_dir: str = "data"):
+        # Set data directory
+        self.data_dir = Path(data_dir)
+        # Initialize FAQ system
+        self.faqs = self._load_faqs()
+        # Initialize user profiles
+        self.user_profiles = {}
+        # Initialize program categories
+        self.program_categories = [
+            'Tech Skills (AI/ML, Big Data, Blockchain)',
+            'Career Development',
+            'Leadership Programs',
+            'Returnship Programs'
+        ]
         # Hinglish to English mappings
         self.hinglish_map = {
             # Questions
@@ -230,6 +244,32 @@ class SimpleAsha:
                 response["text"] += "• Career comeback support\n\n"
                 response["text"] += "Would you like more details about any of these courses?"
 
+            # Check for FAQs
+            faq_response = self.handle_faq(user_input)
+            if faq_response:
+                response["text"] = faq_response
+                return response
+
+            # Check for program discovery intent
+            if any(keyword in user_input.lower() for keyword in ['program', 'course', 'training', 'learn']):
+                response["text"] = self.handle_program_discovery()
+                return response
+
+            # Check for signup assistance
+            if any(keyword in user_input.lower() for keyword in ['sign up', 'join', 'register', 'signup']):
+                response["text"] = self.handle_signup_assistance()
+                return response
+
+            # Check for profile update intent
+            if any(keyword in user_input.lower() for keyword in ['profile', 'update profile', 'edit profile']):
+                response["text"] = "To update your profile:\n" + \
+                                 "1. Go to 'My Profile'\n" + \
+                                 "2. Click 'Edit'\n" + \
+                                 "3. Update your information\n" + \
+                                 "4. Click 'Save Changes'\n\n" + \
+                                 "What would you like to update?"
+                return response
+
             # Default response if no specific intent is matched
             if not response["text"]:
                 response["text"] = "I'm here to help with your career journey! You can ask me about:\n\n" + \
@@ -273,8 +313,86 @@ class SimpleAsha:
         """Get conversation history for a session."""
         return self.conversation_history.get(session_id, [])
 
+    def _load_faqs(self) -> Dict:
+        """Load FAQs from JSON file."""
+        try:
+            with open(self.data_dir / 'faqs.json', 'r') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Error loading FAQs: {e}")
+            return {'faqs': []}
+
+    def handle_faq(self, query: str) -> str:
+        """Find and return relevant FAQ answer."""
+        query = query.lower()
+        for faq in self.faqs.get('faqs', []):
+            if any(keyword in query for keyword in faq['question'].lower().split()):
+                return faq['answer']
+        return ""
+
+    def handle_profile_update(self, user_id: str, updates: Dict) -> Dict:
+        """Handle user profile updates."""
+        if user_id not in self.user_profiles:
+            self.user_profiles[user_id] = {}
+        
+        self.user_profiles[user_id].update(updates)
+        return {
+            'status': 'success',
+            'message': 'Profile updated successfully',
+            'profile': self.user_profiles[user_id]
+        }
+
+    def handle_program_discovery(self, category: str = None) -> str:
+        """Handle program and feature discovery."""
+        if category:
+            if 'tech' in category.lower():
+                return "Our tech programs include:\n" + \
+                       "• AI/ML Training\n" + \
+                       "• Big Data Analytics\n" + \
+                       "• Blockchain Development\n" + \
+                       "• Cloud Computing\n" + \
+                       "• Cybersecurity\n\n" + \
+                       "All programs include mentorship and practical projects."
+            elif 'career' in category.lower():
+                return "Career Development Programs:\n" + \
+                       "• Resume Building Workshops\n" + \
+                       "• Interview Preparation\n" + \
+                       "• Personal Branding\n" + \
+                       "• Networking Skills"
+        
+        return "We offer various programs:\n" + \
+               "1. Tech Skills Training\n" + \
+               "2. Career Development\n" + \
+               "3. Leadership Programs\n" + \
+               "4. Returnship Programs\n\n" + \
+               "Which category interests you?"
+
+    def handle_signup_assistance(self, step: str = None) -> str:
+        """Guide users through the signup process."""
+        if not step:
+            return "To sign up:\n" + \
+                   "1. Visit our website\n" + \
+                   "2. Click 'Join Now'\n" + \
+                   "3. Fill in your details\n" + \
+                   "4. Verify your email\n" + \
+                   "5. Complete your profile\n\n" + \
+                   "Would you like help with any specific step?"
+        
+        steps = {
+            'profile': "To complete your profile:\n" + \
+                      "• Add your professional experience\n" + \
+                      "• List your skills\n" + \
+                      "• Upload your resume\n" + \
+                      "• Set your preferences",
+            'verification': "To verify your email:\n" + \
+                          "1. Check your inbox\n" + \
+                          "2. Click the verification link\n" + \
+                          "3. Follow the instructions"
+        }
+        return steps.get(step, "Please specify which part of the signup process you need help with.")
+
 def main():
-    asha = SimpleAsha()
+    asha = SimpleAsha(data_dir="data")
     
     print("\nWelcome to JobsForHer! 👋")
     print("I'm Asha, your AI assistant for career guidance.")
