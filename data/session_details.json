@@ -1,36 +1,135 @@
 {
+    "main_options": [
+        {
+            "id": 1,
+            "title": "herShakti Program",
+            "description": "Government-industry consortium for upskilling in emerging technologies"
+        },
+        {
+            "id": 2,
+            "title": "DivHERsity Club",
+            "description": "Member-only community for DEI leaders and professionals"
+        },
+        {
+            "id": 3,
+            "title": "Career Development",
+            "description": "Career guidance and upskilling opportunities"
+        },
+        {
+            "id": 4,
+            "title": "Entrepreneurship Support",
+            "description": "Resources and guidance for women entrepreneurs"
+        },
+        {
+            "id": 5,
+            "title": "About Us",
+            "description": "Information about JobsForHer Foundation"
+        }
+    ],
+    "hershakti_courses": [
+        {
+            "id": "hs001",
+            "title": "AI/ML Fundamentals",
+            "duration": "12 weeks",
+            "level": "Beginner",
+            "description": "Introduction to Artificial Intelligence and Machine Learning"
+        },
+        {
+            "id": "hs002",
+            "title": "Big Data Analytics",
+            "duration": "10 weeks",
+            "level": "Intermediate",
+            "description": "Big Data processing and analytics fundamentals"
+        },
+        {
+            "id": "hs003",
+            "title": "Blockchain Technology",
+            "duration": "8 weeks",
+            "level": "Beginner",
+            "description": "Blockchain fundamentals and applications"
+        },
+        {
+            "id": "hs004",
+            "title": "Cybersecurity Essentials",
+            "duration": "10 weeks",
+            "level": "Intermediate",
+            "description": "Core concepts in cybersecurity"
+        },
+        {
+            "id": "hs005",
+            "title": "Cloud Computing",
+            "duration": "12 weeks",
+            "level": "Beginner",
+            "description": "Cloud platforms and services"
+        }
+    ],
     "events": [
         {
             "id": "evt001",
-            "title": "Women in Tech Leadership Summit",
+            "title": "Startup Saturday Workshop",
             "date": "2025-05-15",
             "location": "Bangalore",
-            "description": "Leadership development workshop for women in technology",
-            "registration_link": "https://example.com/tech-summit"
+            "description": "Entrepreneurship workshop in collaboration with Headstart",
+            "registration_link": "https://jobsforherfoundation.org/events/startup-saturday"
         },
         {
             "id": "evt002",
-            "title": "Career Comeback Workshop",
+            "title": "Tech Upskilling Bootcamp",
             "date": "2025-05-20",
             "location": "Virtual",
-            "description": "Workshop for women returning to the workforce",
-            "registration_link": "https://example.com/comeback-workshop"
+            "description": "Intensive tech skills development program",
+            "registration_link": "https://jobsforherfoundation.org/events/tech-bootcamp"
+        },
+        {
+            "id": "evt003",
+            "title": "DivHERsity Leadership Summit",
+            "date": "2025-06-01",
+            "location": "Bangalore",
+            "description": "Summit for D&I leaders and professionals",
+            "registration_link": "https://jobsforherfoundation.org/events/divhersity-summit"
         }
     ],
     "mentorship_programs": [
         {
             "id": "mnt001",
-            "title": "Tech Leadership Mentorship",
+            "title": "Tech Leadership Track",
             "duration": "3 months",
             "area": "Technology Leadership",
-            "description": "One-on-one mentorship with tech leaders"
+            "description": "Mentorship with tech industry leaders"
         },
         {
             "id": "mnt002",
-            "title": "Career Transition Program",
+            "title": "Career Restart Program",
             "duration": "6 months",
             "area": "Career Development",
-            "description": "Guidance for career transitions and growth"
+            "description": "Guidance for women returning to workforce"
+        },
+        {
+            "id": "mnt003",
+            "title": "Entrepreneurship Mentoring",
+            "duration": "4 months",
+            "area": "Entrepreneurship",
+            "description": "Support for women entrepreneurs"
+        }
+    ],
+    "career_resources": [
+        {
+            "id": "cr001",
+            "title": "Resume Building Workshop",
+            "format": "Virtual Workshop",
+            "duration": "2 hours"
+        },
+        {
+            "id": "cr002",
+            "title": "Interview Preparation",
+            "format": "1:1 Coaching",
+            "duration": "1 hour"
+        },
+        {
+            "id": "cr003",
+            "title": "Career Transition Strategy",
+            "format": "Personalized Session",
+            "duration": "90 minutes"
         }
     ]
 }

@@ -1,0 +1,177 @@
+{
+    "programs": {
+        "leadership": {
+            "id": "pd001",
+            "title": "Women in Leadership",
+            "duration": "3 months",
+            "format": "Hybrid",
+            "description": "Executive leadership program for aspiring women leaders",
+            "modules": [
+                {
+                    "title": "Strategic Leadership",
+                    "topics": [
+                        "Leadership styles and effectiveness",
+                        "Decision making and problem solving",
+                        "Change management",
+                        "Building high-performance teams"
+                    ]
+                },
+                {
+                    "title": "Communication & Influence",
+                    "topics": [
+                        "Executive presence",
+                        "Negotiation skills",
+                        "Public speaking",
+                        "Stakeholder management"
+                    ]
+                },
+                {
+                    "title": "Career Advancement",
+                    "topics": [
+                        "Personal branding",
+                        "Networking strategies",
+                        "Work-life integration",
+                        "Career planning"
+                    ]
+                }
+            ],
+            "benefits": [
+                "1:1 Executive coaching",
+                "Industry mentor matching",
+                "Leadership assessment tools",
+                "Networking events"
+            ]
+        },
+        "technical": {
+            "id": "pd002",
+            "title": "Tech Leadership Accelerator",
+            "duration": "4 months",
+            "format": "Online",
+            "description": "Technical leadership program for women in tech",
+            "modules": [
+                {
+                    "title": "Technical Leadership",
+                    "topics": [
+                        "Architecture & system design",
+                        "Technical decision making",
+                        "Code review leadership",
+                        "Technical mentoring"
+                    ]
+                },
+                {
+                    "title": "Project Management",
+                    "topics": [
+                        "Agile leadership",
+                        "Release management",
+                        "Risk management",
+                        "Team productivity"
+                    ]
+                },
+                {
+                    "title": "Innovation & Strategy",
+                    "topics": [
+                        "Technology roadmap",
+                        "Innovation management",
+                        "Technical vision",
+                        "Strategic planning"
+                    ]
+                }
+            ],
+            "benefits": [
+                "Technical mentorship",
+                "Project shadowing",
+                "Industry certifications",
+                "Tech community access"
+            ]
+        },
+        "entrepreneurship": {
+            "id": "pd003",
+            "title": "Women Entrepreneurs Program",
+            "duration": "6 months",
+            "format": "Hybrid",
+            "description": "Comprehensive program for women entrepreneurs",
+            "modules": [
+                {
+                    "title": "Business Fundamentals",
+                    "topics": [
+                        "Business planning",
+                        "Market research",
+                        "Financial management",
+                        "Legal essentials"
+                    ]
+                },
+                {
+                    "title": "Growth & Scale",
+                    "topics": [
+                        "Marketing strategy",
+                        "Sales techniques",
+                        "Team building",
+                        "Funding options"
+                    ]
+                },
+                {
+                    "title": "Digital Presence",
+                    "topics": [
+                        "Digital marketing",
+                        "E-commerce setup",
+                        "Social media strategy",
+                        "Online branding"
+                    ]
+                }
+            ],
+            "benefits": [
+                "Funding connections",
+                "Business mentor matching",
+                "Networking events",
+                "Resource toolkit"
+            ]
+        }
+    },
+    "workshops": [
+        {
+            "id": "ws001",
+            "title": "Personal Branding Masterclass",
+            "duration": "1 day",
+            "date": "2025-05-10",
+            "format": "Virtual"
+        },
+        {
+            "id": "ws002",
+            "title": "Negotiation Skills Workshop",
+            "duration": "2 days",
+            "date": "2025-05-15",
+            "format": "In-person"
+        },
+        {
+            "id": "ws003",
+            "title": "Work-Life Balance Workshop",
+            "duration": "1 day",
+            "date": "2025-05-20",
+            "format": "Hybrid"
+        }
+    ],
+    "resources": [
+        {
+            "id": "res001",
+            "title": "Career Development Toolkit",
+            "type": "PDF Guide",
+            "topics": [
+                "Resume writing",
+                "Interview preparation",
+                "LinkedIn optimization",
+                "Networking guide"
+            ]
+        },
+        {
+            "id": "res002",
+            "title": "Leadership Resource Library",
+            "type": "Online Portal",
+            "topics": [
+                "Case studies",
+                "Video lectures",
+                "Assessment tools",
+                "Templates"
+            ]
+        }
+    ]
+}

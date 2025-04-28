@@ -1,0 +1,103 @@
+{
+    "jobs": [
+        {
+            "id": "job001",
+            "title": "Senior Software Engineer",
+            "company": "TechCorp India",
+            "location": "Bangalore (Hybrid)",
+            "type": "Full-time",
+            "experience": "5-8 years",
+            "skills_required": [
+                "Java", "Spring Boot", "Microservices", "AWS"
+            ],
+            "description": "Join our innovative team building next-gen enterprise solutions",
+            "women_friendly_benefits": [
+                "6 months maternity leave",
+                "Flexible work hours",
+                "Childcare support",
+                "Women mentorship program"
+            ],
+            "salary_range": "18-25 LPA",
+            "posted_date": "2025-04-25",
+            "flexibility_score": 4.5
+        },
+        {
+            "id": "job002",
+            "title": "Product Manager",
+            "company": "FinTech Solutions",
+            "location": "Remote",
+            "type": "Full-time",
+            "experience": "4-7 years",
+            "skills_required": [
+                "Product Strategy", "Agile", "Data Analytics", "Financial Domain"
+            ],
+            "description": "Lead our flagship financial products team",
+            "women_friendly_benefits": [
+                "100% remote work",
+                "Flexible schedules",
+                "Leadership development",
+                "Healthcare benefits"
+            ],
+            "salary_range": "20-28 LPA",
+            "posted_date": "2025-04-26",
+            "flexibility_score": 5.0
+        },
+        {
+            "id": "job003",
+            "title": "Data Scientist",
+            "company": "AI Innovations",
+            "location": "Hybrid (2 days office)",
+            "type": "Full-time",
+            "experience": "3-6 years",
+            "skills_required": [
+                "Python", "Machine Learning", "Deep Learning", "NLP"
+            ],
+            "description": "Work on cutting-edge AI solutions",
+            "women_friendly_benefits": [
+                "Learning stipend",
+                "Conference sponsorships",
+                "Research opportunities",
+                "Work from anywhere weeks"
+            ],
+            "salary_range": "16-22 LPA",
+            "posted_date": "2025-04-27",
+            "flexibility_score": 4.8
+        },
+        {
+            "id": "job004",
+            "title": "UX Designer",
+            "company": "Design Studios",
+            "location": "Mumbai (Remote optional)",
+            "type": "Full-time",
+            "experience": "2-5 years",
+            "skills_required": [
+                "Figma", "User Research", "Design Systems", "Prototyping"
+            ],
+            "description": "Create beautiful, user-centric experiences",
+            "women_friendly_benefits": [
+                "Creative freedom",
+                "Flexible timings",
+                "Design conference budget",
+                "Mentorship program"
+            ],
+            "salary_range": "12-18 LPA",
+            "posted_date": "2025-04-28",
+            "flexibility_score": 4.7
+        }
+    ],
+    "job_categories": [
+        "Technology",
+        "Management",
+        "Design",
+        "Data Science",
+        "Marketing",
+        "Finance",
+        "HR"
+    ],
+    "work_models": [
+        "Remote",
+        "Hybrid",
+        "Flexible",
+        "Office"
+    ]
+}

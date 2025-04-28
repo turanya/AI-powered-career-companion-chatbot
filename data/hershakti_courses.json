@@ -1,0 +1,254 @@
+{
+    "courses": {
+        "ai_ml": {
+            "id": "hs001",
+            "title": "AI/ML Fundamentals",
+            "duration": "12 weeks",
+            "level": "Beginner",
+            "description": "Introduction to Artificial Intelligence and Machine Learning",
+            "syllabus": [
+                {
+                    "week": 1,
+                    "topic": "Introduction to AI & ML",
+                    "content": [
+                        "What is AI/ML",
+                        "Types of Machine Learning",
+                        "Real-world Applications",
+                        "Career Opportunities"
+                    ]
+                },
+                {
+                    "week": 2,
+                    "topic": "Python for AI/ML",
+                    "content": [
+                        "Python Basics",
+                        "NumPy & Pandas",
+                        "Data Manipulation",
+                        "Visualization with Matplotlib"
+                    ]
+                },
+                {
+                    "week": 3,
+                    "topic": "Data Preprocessing",
+                    "content": [
+                        "Data Cleaning",
+                        "Feature Engineering",
+                        "Data Transformation",
+                        "Handling Missing Values"
+                    ]
+                }
+            ],
+            "prerequisites": [
+                "Basic programming knowledge",
+                "Mathematics fundamentals",
+                "Analytical thinking"
+            ],
+            "career_paths": [
+                "ML Engineer",
+                "Data Scientist",
+                "AI Developer",
+                "Research Associate"
+            ]
+        },
+        "big_data": {
+            "id": "hs002",
+            "title": "Big Data Analytics",
+            "duration": "10 weeks",
+            "level": "Intermediate",
+            "description": "Big Data processing and analytics fundamentals",
+            "syllabus": [
+                {
+                    "week": 1,
+                    "topic": "Introduction to Big Data",
+                    "content": [
+                        "What is Big Data",
+                        "The 5 V's of Big Data",
+                        "Big Data Ecosystem",
+                        "Use Cases"
+                    ]
+                },
+                {
+                    "week": 2,
+                    "topic": "Hadoop Ecosystem",
+                    "content": [
+                        "HDFS Architecture",
+                        "MapReduce Framework",
+                        "YARN",
+                        "Hadoop Tools"
+                    ]
+                },
+                {
+                    "week": 3,
+                    "topic": "Data Processing",
+                    "content": [
+                        "Apache Spark",
+                        "Batch Processing",
+                        "Stream Processing",
+                        "Data Lakes"
+                    ]
+                }
+            ],
+            "prerequisites": [
+                "SQL knowledge",
+                "Basic programming",
+                "Data structures"
+            ],
+            "career_paths": [
+                "Big Data Engineer",
+                "Data Architect",
+                "Analytics Manager",
+                "ETL Developer"
+            ]
+        },
+        "blockchain": {
+            "id": "hs003",
+            "title": "Blockchain Technology",
+            "duration": "8 weeks",
+            "level": "Beginner",
+            "description": "Blockchain fundamentals and applications",
+            "syllabus": [
+                {
+                    "week": 1,
+                    "topic": "Blockchain Basics",
+                    "content": [
+                        "What is Blockchain",
+                        "Decentralization",
+                        "Consensus Mechanisms",
+                        "Cryptography Basics"
+                    ]
+                },
+                {
+                    "week": 2,
+                    "topic": "Smart Contracts",
+                    "content": [
+                        "Ethereum Platform",
+                        "Solidity Programming",
+                        "DApps",
+                        "Web3"
+                    ]
+                },
+                {
+                    "week": 3,
+                    "topic": "Enterprise Blockchain",
+                    "content": [
+                        "Private Blockchains",
+                        "Hyperledger",
+                        "Use Cases",
+                        "Implementation"
+                    ]
+                }
+            ],
+            "prerequisites": [
+                "Basic programming",
+                "Networking concepts",
+                "Cryptography interest"
+            ],
+            "career_paths": [
+                "Blockchain Developer",
+                "Smart Contract Developer",
+                "Solution Architect",
+                "Project Manager"
+            ]
+        },
+        "cybersecurity": {
+            "id": "hs004",
+            "title": "Cybersecurity Essentials",
+            "duration": "10 weeks",
+            "level": "Intermediate",
+            "description": "Core concepts in cybersecurity",
+            "syllabus": [
+                {
+                    "week": 1,
+                    "topic": "Security Fundamentals",
+                    "content": [
+                        "CIA Triad",
+                        "Security Controls",
+                        "Risk Management",
+                        "Security Frameworks"
+                    ]
+                },
+                {
+                    "week": 2,
+                    "topic": "Network Security",
+                    "content": [
+                        "Network Protocols",
+                        "Firewalls & IDS",
+                        "VPNs",
+                        "Security Architecture"
+                    ]
+                },
+                {
+                    "week": 3,
+                    "topic": "Application Security",
+                    "content": [
+                        "OWASP Top 10",
+                        "Secure Coding",
+                        "Penetration Testing",
+                        "Security Tools"
+                    ]
+                }
+            ],
+            "prerequisites": [
+                "Networking basics",
+                "Operating systems",
+                "Basic scripting"
+            ],
+            "career_paths": [
+                "Security Analyst",
+                "Security Engineer",
+                "Pen Tester",
+                "Security Consultant"
+            ]
+        },
+        "cloud": {
+            "id": "hs005",
+            "title": "Cloud Computing",
+            "duration": "12 weeks",
+            "level": "Beginner",
+            "description": "Cloud platforms and services",
+            "syllabus": [
+                {
+                    "week": 1,
+                    "topic": "Cloud Fundamentals",
+                    "content": [
+                        "Cloud Models",
+                        "Service Types",
+                        "Cloud Architecture",
+                        "Benefits & Challenges"
+                    ]
+                },
+                {
+                    "week": 2,
+                    "topic": "AWS Essentials",
+                    "content": [
+                        "EC2 & S3",
+                        "IAM",
+                        "VPC",
+                        "AWS Services"
+                    ]
+                },
+                {
+                    "week": 3,
+                    "topic": "Cloud Security",
+                    "content": [
+                        "Security Models",
+                        "Identity Management",
+                        "Data Protection",
+                        "Compliance"
+                    ]
+                }
+            ],
+            "prerequisites": [
+                "IT fundamentals",
+                "Basic networking",
+                "Command line"
+            ],
+            "career_paths": [
+                "Cloud Engineer",
+                "Solutions Architect",
+                "DevOps Engineer",
+                "Cloud Administrator"
+            ]
+        }
+    }
+}
