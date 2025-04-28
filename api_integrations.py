@@ -8,7 +8,6 @@ from functools import wraps
 import backoff
 from ratelimit import limits, sleep_and_retry
 
-
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

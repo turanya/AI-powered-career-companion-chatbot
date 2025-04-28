@@ -185,6 +185,45 @@ class SimpleAsha:
                         "• Upcoming events 📅\n\n" + \
                         "What would you like to explore?"}
 
+            # Check for professional development queries
+            if any(word in processed_input for word in ['professional', 'development', 'course', 'training', 'learn', 'skill']):                
+                return {
+                    "text": "🌟 Here are some excellent professional development opportunities from JobsForHer Foundation:\n\n" + \
+                            "1. herShakti Program:\n" + \
+                            "   • Government-industry consortium for emerging tech\n" + \
+                            "   • Focus: AI/ML, Big Data, Blockchain, Cloud Computing\n" + \
+                            "   • Perfect for returnees and career starters\n\n" + \
+                            "2. Simplilearn Partnership Programs:\n" + \
+                            "   • Advanced SEO Certification\n" + \
+                            "   • Advanced PPC Program\n" + \
+                            "   • Social Media & Digital Marketing\n" + \
+                            "   • 100% scholarship for women returnees!\n\n" + \
+                            "3. Microsoft AI Careers for Women:\n" + \
+                            "   • Industry-aligned AI skills training\n" + \
+                            "   • Partnership with Ministry of Skill Development\n" + \
+                            "   • Centers in 6 states across India\n\n" + \
+                            "Would you like more details about any of these programs? 🎯"
+                }
+
+            # Check for events and workshops
+            if any(word in processed_input for word in ['event', 'workshop', 'webinar', 'conference', 'meetup']):
+                return {
+                    "text": "📅 Exciting upcoming events from JobsForHer Foundation:\n\n" + \
+                            "1. DivHERsity.club Sessions:\n" + \
+                            "   • Exclusive member-only community for leaders\n" + \
+                            "   • Focus on Diversity, Equity & Inclusion\n" + \
+                            "   • Network with D&I leaders and HR professionals\n\n" + \
+                            "2. Startup Saturday Program:\n" + \
+                            "   • In collaboration with Headstart\n" + \
+                            "   • Entrepreneurship workshops\n" + \
+                            "   • Networking opportunities\n\n" + \
+                            "3. Career Development Workshops:\n" + \
+                            "   • NIPP Blockchain Challenge\n" + \
+                            "   • Career guidance through CTT partnership\n" + \
+                            "   • Tech upskilling sessions\n\n" + \
+                            "Would you like to register for any of these events? Or shall I notify you about upcoming sessions? 🎉"
+                }
+
             # Check for job-related queries
             if any(word in processed_input for word in ['job', 'work', 'career', 'opportunity', 'position', 'opening', 'vacancy']):
                 job_listings = self.knowledge_base.get_job_listings()
